@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    place-items: center;
+    font-family: 'Josefin Sans', sans-serif;
+    overflow: hidden;
+    background-color: rgba(231, 170, 231, 0.141);
+}
+
+h1 {
+    color: #F9A826;
+    text-shadow: 2px 3px 2px rgb(197, 187, 187);
+}
+
+.box {
+    background: #fff;
+    box-shadow: 0 15px 30px rgba(248, 133, 2, 0.1);
+    border-radius: 50px;
+    position: relative;
+    top: -100px;
+    width: 500px;
+    height: 300px;
+    text-align: center;
+}
+
+.field,
+.button {
+    position: relative;
+    top: 60px;
+}
+
+.field label {
+    font-size: larger;
+    font-weight: 700;
+    color: rgba(30, 41, 79, 0.868);
+}
+
+.field span {
+    display: inline-block;
+    margin-top: 20px;
+    line-height: 20px;
+    font-size: larger;
+    color: #172545d6;
+}
+
+div .button input {
+    background-color: #F9A826;
+    width: 100px;
+    height: 50px;
+    position: relative;
+    left: -5px;
+    cursor: pointer;
+    top: 20px;
+    border: 1px solid #F9A826;
+    border-radius: 25px;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+div .button input:hover {
+    background-color: #fff;
+    color: #F9A826;
+}
