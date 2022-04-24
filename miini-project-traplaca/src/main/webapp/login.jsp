@@ -37,7 +37,7 @@
                 <div class="field" id="type">
 
                     <label for="type"><span>Choose Type : </span> </label>
-                    <input type="radio" name="usertype" id="c" value="company"> <span>Company</span>&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="usertype" id="c" value="company"> <span>Recruiter</span>&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="usertype" id="s" value="student"> <span>Student</span>&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="usertype" id="a" value="admin"> <span>Admin</span>&nbsp;&nbsp;&nbsp;
                 </div>
