@@ -77,9 +77,10 @@ if (session.getAttribute("name") == null) {
 			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
 			password="123456" />
 			 <sql:query dataSource="${db}" var="rs">  
-SELECT recruiter.rec_name, job.job_title,recruiter.rec_id FROM ((recruiter INNER JOIN job ON recruiter.rec_id=job.rec_id) INNER JOIN applicant
+SELECT recruiter.rec_name, job.job_title,job.job_id,recruiter.rec_id FROM ((recruiter INNER JOIN job ON recruiter.rec_id=job.rec_id) INNER JOIN applicant
 ON applicant.location = job.location AND applicant.app_name='<%= session.getAttribute("name") %>' )
 </sql:query>
+
 			<h3>Opportunities near you</h3>
 			<marquee behavior="scrolling" direction="up" height="350px"
 				scrollamount="5" onmouseover="this.stop();"
@@ -97,15 +98,18 @@ ON applicant.location = job.location AND applicant.app_name='<%= session.getAttr
 		 
 		<div class="jobs-by-interest">
 		<sql:query dataSource="${db}" var="rs">  
-SELECT recruiter.rec_name, job.job_title,recruiter.rec_id FROM ((recruiter INNER JOIN job ON recruiter.rec_id=job.rec_id) INNER JOIN applicant
+SELECT recruiter.rec_name, job.job_title,job.job_id,recruiter.rec_id FROM ((recruiter INNER JOIN job ON recruiter.rec_id=job.rec_id) INNER JOIN applicant
 ON applicant.course_id = job.course_id AND applicant.app_name='<%= session.getAttribute("name") %>')
  
 </sql:query>
+
+
 			<h3>Based on your course</h3>
 			<marquee behavior="scrolling" direction="up" height="350px"
 				scrollamount="5" onmouseover="this.stop();"
 				onmouseout="this.start();">
 				<c:forEach var="table" items="${rs.rows}">
+				
 				<ul>
 					<li><c:out value="${table.rec_name} --- ${table.job_title}" />
 					 <a href="job_knowMore.jsp?cid=<c:out value="${table.rec_id}"/>&jtitle=<c:out value="${table.job_title}"/>"> Know More</a></li>

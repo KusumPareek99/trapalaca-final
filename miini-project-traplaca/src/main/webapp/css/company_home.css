@@ -80,29 +80,40 @@ body {
     background: #fff;
     box-shadow: 0 15px 30px rgba(248, 133, 2, 0.1);
     border-radius: 10px;
-    width: 500px;
+    width: 700px;
     height: 400px;
     line-height: 40px;
     padding: 35px 15px;
     margin: 100px 200px;
     text-align: center;
     position: relative;
-    left: 300px;
+    left: 250px;
 }
-
-.content ol {
-    list-style-position: inside;
-    text-align: center;
-}
-
-.content ol li {
-    font-size: large;
-}
-
 .content h1 {
     text-align: center;
     color: #04203ac9;
 }
+
+
+.content .list table {
+    text-align: center;
+    position: relative;
+    left: 20px;
+    line-height: 25px;
+    font-size: larger;
+}
+
+.content .list table tr th {
+    background-color: #94661c;
+    color: #fcfcfc;
+    padding: 5px 7px;
+}
+
+.content .list table tr td {
+    background-color: antiquewhite;
+    padding: 5px 7px;
+}
+
 
 .sticky {
     position: sticky;

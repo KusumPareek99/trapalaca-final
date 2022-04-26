@@ -39,7 +39,7 @@
             <div class="items ">
                 <a href="Company_home.jsp" >Home</a>
                 <a href="job_post.html"class="active">Create a Job Post</a>
-                <a href="#">About Us</a>
+                <a href="about_us.jsp">About Us</a>
 
             </div>
             <div class="menu">

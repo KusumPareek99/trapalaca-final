@@ -61,14 +61,16 @@
             <hr>
         </ul>
     </div>
+    <form action="ApplyForJob" method="post">
     <div class="content">
     <sql:setDataSource var="db" driver="com.mysql.cj.jdbc.Driver"
 			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
 			password="123456" />
 			<sql:query dataSource="${db}" var="rs">  
 			
-SELECT job.job_title,job.job_desc,job.last_date,job.location from job,recruiter WHERE job.job_title="<c:out value="${param.jtitle}"/>" AND job.rec_id=<c:out value="${param.cid}"/>;  
+SELECT job.job_title,job.job_id,job.rec_id,job.job_desc,job.last_date,job.location from job,recruiter WHERE job.job_title="<c:out value="${param.jtitle}"/>" AND job.rec_id=<c:out value="${param.cid}"/>;  
 </sql:query>
+
        <table>
        
               <tr>
@@ -80,7 +82,12 @@ SELECT job.job_title,job.job_desc,job.last_date,job.location from job,recruiter 
             </tr>
               
             <c:forEach var="table" items="${rs.rows}">
-         
+         <c:set var="jobId" scope="session" value="${table.job_id}"/>
+         <c:set var="recId" scope="session" value="${table.rec_id}"/>
+				<c:out value="${table.job_id } is my cout job id." />
+				<c:out value="${table.rec_id } is my cout rec id." />
+<c:out value="${jobId} is job id."/>
+<c:out value="${recId} is rec id."/>
             <tr>
                 <td><c:out value="${table.job_title}" /></td>
                 <td><c:out value="${table.job_desc}" /></td>
@@ -90,8 +97,11 @@ SELECT job.job_title,job.job_desc,job.last_date,job.location from job,recruiter 
             </tr>
            </c:forEach>
         </table>
-
+<div class="button">
+<input type="submit" value="Apply for this job">
+</div>
     </div>
+    </form>
     <div class="footer">
         <footer>
             <h3>Contact Us</h3>
@@ -102,6 +112,7 @@ SELECT job.job_title,job.job_desc,job.last_date,job.location from job,recruiter 
             </ol>
         </footer>
     </div>
+    
     <script>
         window.onscroll = function() {
             myFunction()

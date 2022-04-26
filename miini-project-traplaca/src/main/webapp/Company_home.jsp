@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 	<% if (session.getAttribute("name")==null) { response.sendRedirect("login.jsp"); } %>
 
 
@@ -41,7 +45,7 @@
 					<a href="Company_home.jsp" class="active ">Home</a>
 					<a href="job_post.jsp">Create a Job Post</a>
 					<a href="about_us.jsp">About Us</a>
-
+<a href="company_profile.jsp"><%= session.getAttribute("name") %></a>
 				</div>
 				<div class="menu">
 					<i class="fa fa-navicon"
@@ -61,15 +65,39 @@
 				</ul>
 			</div>
 			<div class="content">
+			<sql:setDataSource var="db" driver="com.mysql.cj.jdbc.Driver"
+			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
+			password="123456" />
+			<sql:query dataSource="${db}" var="rs">
+				SELECT rec_id FROM recruiter WHERE rec_name='<%= session.getAttribute("name") %>'
+			</sql:query>
+			<c:forEach var="table" items="${rs.rows}">
+         <c:set var="recId" scope="session" value="${table.rec_id}"/>
+         </c:forEach>
+		<sql:query dataSource="${db}" var="rs">  
+SELECT app_name,app_email,app_resume,job.job_title from applicant,job WHERE applicant.job_id=job.job_id AND job.rec_id=<c:out value="${recId}"/>
+</sql:query> 
 				<h1>Applicants List</h1>
 				<br>
 				<br>
 				<div class="list">
-					<ol>
-						<li>Candidate A</li>
-						<li>Candidate B</li>
-						<li>Candidate C</li>
-					</ol>
+				<table>
+					<tr>
+					<th>Job Title</th>
+					 <th>Applicant Name</th>
+               		 <th>Applicant Email</th>
+              		 <th>Resume</th>
+				   </tr>
+					<c:forEach var="table" items="${rs.rows}">
+					<tr>
+						<td><c:out value="${table.job_title}" /></td>
+						<td><c:out value="${table.app_name}" /></td>
+						<td><c:out value="${table.app_email}" /></td>
+						<td><c:out value="${table.app_resume}" /></td>
+					</tr>
+				</c:forEach>
+						
+					</table>
 				</div>
 			</div>
 			<div class="footer">

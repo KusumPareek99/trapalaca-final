@@ -106,13 +106,19 @@ body {
     font-size: 20px;
 }
 
-.content .search-domain .search-bar .fa-search {
+.content .search-domain .search-bar button{
     color: #04203ac9;
+    height: min-content;
     position: relative;
     left: -50px;
-    top: 10px;
+    top: 7px;
+    font-size: 1.2em;
+    border: none;
+    background-color: white;
 }
-
+.content .search-domain .search-bar button:hover{
+	cursor:pointer;
+}
 .content .search-domain .domains {
     margin-bottom: 20px;
     box-shadow: 0 15px 20px rgba(0, 0.2, 0, 0.2);
@@ -126,20 +132,13 @@ body {
 
 .content .search-domain .domains ul {
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     list-style-type: none;
     margin-left: 15px;
     margin-top: 20px;
     line-height: 50px;
 }
-
-
-/* .content .search-domain .domains ul li {
-    margin-left: 20px;
-    margin-bottom: 40px;
-    background-color: #F9A826;
-} */
 
 .content .search-domain .domains ul li:nth-child(odd) {
     margin-left: 20px;
@@ -149,6 +148,7 @@ body {
     border-radius: 0 20px 0 20px;
     background-color: #F9A826;
     padding: 15px;
+     flex: 200px;
 }
 
 .content .search-domain .domains ul li:nth-child(even) {
@@ -160,6 +160,7 @@ body {
     border-radius: 20px 0 20px 0;
     color: blanchedalmond;
     padding: 15px;
+     flex: 200px;
 }
 
 .content .search-domain .domains ul li a {
