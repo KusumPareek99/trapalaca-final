@@ -40,16 +40,7 @@ public class RegistrationServlet extends HttpServlet {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?useSSL=false", "root", "123456");
-			RequestDispatcher rd = null;
-			/*
-			 * Statement sel = conn.createStatement(); ResultSet rs =
-			 * sel.executeQuery("select app_email from applicant where app_email=\"" +
-			 * uemail + "\";"); if(rs.next()) { System.out.println("IN IFF"); rd =
-			 * request.getRequestDispatcher("login.jsp"); rd.forward(request, response);
-			 * }else
-			 * {
-			 */
-				System.out.println("IN ELSE");
+			
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery("select course_id from course where course_name = \""  + ucourse +"\";");
 			

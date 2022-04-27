@@ -53,17 +53,18 @@
 <c:if test="${userType=='company'}">
 
             <div class="items ">
-                <a href="Company_home.jsp" class="active ">Home</a>
+                <a href="Company_home.jsp" >Home</a>
 					<a href="job_post.jsp">Create a Job Post</a>
-					<a href="#">About Us</a>
+					<a href="about_us.jsp" class="active ">About Us</a>
             </div>
 </c:if>
 
 <c:if test="${userType=='admin'}">
 
             <div class="items ">
-			<a href="admin_home.jsp" class="active ">Home</a> <a href="">About
-				Us</a>
+			<a href="admin_home.jsp" >Home</a>
+            <a href="admin_add_data.jsp" > Add Career Training Data</a>
+            <a href="about_us.jsp" class="active">About Us</a>
 
             </div>
 </c:if>
@@ -75,8 +76,10 @@
         </div>
         <div class="menu-links" id="menu-link" style="visibility: hidden;">
             <ul style="list-style: none;">
+            <c:if test="${userType=='student' || usertype=='company'}">
                 <li> <a href="profile.jsp">My Profile</a></li>
                 <hr>
+                </c:if>
                 <li><a href="login.jsp">Log Out</a></li>
                 <hr>
                 <li><a href="">Help</a></li>

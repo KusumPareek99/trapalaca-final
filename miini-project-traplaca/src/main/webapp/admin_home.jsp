@@ -57,7 +57,8 @@
 	<div class="navbar" id="nav">
 
 		<div class="items ">
-			<a href="admin_home.jsp" class="active ">Home</a> 
+			<a href="admin_home.jsp" class="active ">Home</a>
+			 <a href="admin_add_data.jsp"> Add Career Training Data</a> 
 			<a href="about_us.jsp">About Us</a>
 
 		</div>
