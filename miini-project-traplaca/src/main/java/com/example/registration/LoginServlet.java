@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.dbconnection.DBConnection;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -32,8 +34,7 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?useSSL=false", "root",
-					"123456");
+			Connection conn = new DBConnection().getConnection();
 			PreparedStatement stmt = null;
 			
 			if (usertype.equals("student")) {
