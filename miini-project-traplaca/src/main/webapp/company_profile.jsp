@@ -63,7 +63,7 @@
 			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
 			password="123456" />
 			<sql:query dataSource="${db}" var="rs">  
-SELECT * from recruiter where app_email='<%= session.getAttribute("c_email") %>';  
+SELECT * from recruiter where rec_email='<%= session.getAttribute("c_email") %>';  
 </sql:query>
         <h1>Your Personal Details</h1><br><br><br>
         <div class="box">
@@ -82,7 +82,14 @@ SELECT * from recruiter where app_email='<%= session.getAttribute("c_email") %>'
 					<label>About company:</label>
 					</td>
 					<td>
-					<textarea name="aboutCom" placeholder="Brief description of what your company does" >${table.rec_desc}</textarea>
+<!-- 					<textarea name="aboutCom" placeholder="Brief description of what your company does" > -->
+					
+<!-- 					</textarea> -->
+				
+					<textarea name="aboutCom" placeholder="Brief description of what your company does" >
+					${table.rec_desc}
+					</textarea>
+				
 					</td>
 				</tr>
 				<tr>
@@ -90,7 +97,9 @@ SELECT * from recruiter where app_email='<%= session.getAttribute("c_email") %>'
 						<label>Address:</label>
 					</td>
 					<td>
-						<textarea name="address" placeholder="Type your address here">${table.rec_address}</textarea>
+						<textarea name="address" placeholder="Type your address here">
+						${table.rec_address}
+						</textarea>
 					</td>	
 				</tr>
                 
