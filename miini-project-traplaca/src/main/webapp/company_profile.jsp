@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +59,15 @@
         </div>
         <form action="CompanyProfile" method="post" >
        <div class="content">
+        <sql:setDataSource var="db" driver="com.mysql.cj.jdbc.Driver"
+			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
+			password="123456" />
+			<sql:query dataSource="${db}" var="rs">  
+SELECT * from recruiter where app_email='<%= session.getAttribute("c_email") %>';  
+</sql:query>
         <h1>Your Personal Details</h1><br><br><br>
         <div class="box">
+         <c:forEach var="table" items="${rs.rows}">
             <table>
                
                 <tr>
@@ -72,7 +82,7 @@
 					<label>About company:</label>
 					</td>
 					<td>
-					<textarea name="aboutCom" placeholder="Brief description of what your company does"></textarea>
+					<textarea name="aboutCom" placeholder="Brief description of what your company does" >${table.rec_desc}</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -80,7 +90,7 @@
 						<label>Address:</label>
 					</td>
 					<td>
-						<textarea name="address" placeholder="Type your address here"></textarea>
+						<textarea name="address" placeholder="Type your address here">${table.rec_address}</textarea>
 					</td>	
 				</tr>
                 
@@ -97,7 +107,7 @@
 
                     </td>
                     <td>
-                       <input type="text" name="contact">
+                       <input type="text" name="contact" value="${table.rec_contact}">
                     </td>
 
                 </tr>
@@ -106,6 +116,7 @@
                     <td><input type="submit" value="Update Profile"></td>
                 </tr>
             </table>
+             </c:forEach>
         </div>
     </div>
     </form>
