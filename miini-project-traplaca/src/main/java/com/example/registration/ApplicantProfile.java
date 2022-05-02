@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.example.dbconnection.DBConnection;
+
 //import com.mysql.cj.xdevapi.Statement;
 
 /**
@@ -77,7 +79,7 @@ public class ApplicantProfile extends HttpServlet {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?useSSL=false", "root", "123456");
+			conn = new DBConnection().getConnection();
 
 			// getting app_id String
 			

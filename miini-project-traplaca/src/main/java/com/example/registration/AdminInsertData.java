@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.dbconnection.DBConnection;
+
 /**
  * Servlet implementation class AdminInsertData
  */
@@ -30,7 +32,7 @@ public class AdminInsertData extends HttpServlet {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?useSSL=false", "root", "123456");
+			conn = new DBConnection().getConnection();
 			
 			PreparedStatement ins = conn.prepareStatement("INSERT INTO career_training (type,links,title) VALUES (?,?,?);");
 			

@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.dbconnection.DBConnection;
+
 /**
  * Servlet implementation class PostJobServlet
  */
@@ -47,7 +49,7 @@ public class PostJobServlet extends HttpServlet {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?useSSL=false", "root", "123456");
+			conn = new DBConnection().getConnection();
 			
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery("select course_id from course where course_name = \""  + course +"\";");

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.dbconnection.DBConnection;
+
 /**
  * Servlet implementation class ApplyForJob
  */
@@ -35,7 +37,7 @@ public class ApplyForJob extends HttpServlet {
 		try {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?useSSL=false", "root", "123456");
+			conn = new DBConnection().getConnection();
 			String query = "UPDATE applicant SET job_id=? WHERE app_name=?";
 			PreparedStatement upstmt = conn.prepareStatement(query);
 		upstmt.setInt(1, id);

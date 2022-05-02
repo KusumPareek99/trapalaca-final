@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.dbconnection.DBConnection;
+
 /**
  * Servlet implementation class RegistrationServlet
  */
@@ -38,7 +40,7 @@ public class RegistrationServletCompany extends HttpServlet {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?useSSL=false", "root", "root");
+			conn = new DBConnection().getConnection();
 
 			PreparedStatement stmt = conn
 					.prepareStatement("insert into recruiter(rec_name, rec_email, rec_password, rec_desc, rec_address) values (?, ?, ?, ?, ?);");
