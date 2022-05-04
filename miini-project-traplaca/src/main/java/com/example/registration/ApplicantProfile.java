@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.example.dbconnection.DBConnection;
+import com.example.dao.DBConnection;
 
 //import com.mysql.cj.xdevapi.Statement;
 

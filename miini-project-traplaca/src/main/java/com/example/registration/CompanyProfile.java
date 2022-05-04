@@ -13,8 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.example.dbconnection.DBConnection;
+import com.example.dao.DBConnection;
+import com.example.dao.RecruiterDao;
+import com.example.models.Recruiter;
 
 /**
  * Servlet implementation class CompanyProfile
@@ -23,52 +26,50 @@ import com.example.dbconnection.DBConnection;
 
 public class CompanyProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private RecruiterDao recruiterDao;
+	
+	
+	public CompanyProfile() {
+		this.recruiterDao = new RecruiterDao();
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String user = request.getParameter("user");
+		String name = request.getParameter("user");
 		String desc = request.getParameter("aboutCom");
 		String address = request.getParameter("address");
 		String email = request.getParameter("mail");
 		String contact = request.getParameter("contact");
 		
-		int id=0;
-		Connection conn = null;
+		HttpSession session = request.getSession();
+
+		System.out.println(session.getAttribute("c_email"));
+
 		RequestDispatcher dispatcher=null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = new DBConnection().getConnection();
-
-			// getting app_id String
-			Statement selstmt =conn.createStatement();
-			ResultSet rs = selstmt.executeQuery("SELECT rec_id FROM recruiter WHERE rec_email= \""  + email +"\";");
 			
-			if (rs.next()) {
-				id = rs.getInt("rec_id");
-			}
+			Recruiter recruiter = recruiterDao.getRecruiterByEmail((String) session.getAttribute("c_email"));
+			Recruiter updatedRec = new Recruiter(recruiter.getId(), name, email, recruiter.getPassword(), desc, address, contact);
 			
+			System.out.println(recruiter);
+			System.out.println(updatedRec);
 			
-			String upquery = "UPDATE recruiter SET rec_name=?,rec_email=?,rec_desc=?,rec_address=?,rec_contact=? WHERE rec_id=?";
-			PreparedStatement upstmt=conn.prepareStatement(upquery);
-			upstmt.setString(1,user);
-			upstmt.setString(2,email);
-			upstmt.setString(3,desc);
-			upstmt.setString(4,address);
-			upstmt.setString(5,contact);
-			upstmt.setInt(6,id);
-			
-			int row = upstmt.executeUpdate();
-			if (row > 0) {
+			boolean didUpdate = recruiterDao.updateRecruiter(updatedRec);
+			if (didUpdate) {
 				System.out.println("Data updation Success");
 				dispatcher = request.getRequestDispatcher("company_profile.jsp");
 			}
+			
+			session.setAttribute("c_email", email);
 			dispatcher.forward(request, response);
 		}
 		catch(Exception e) {
 			
 		}
 	}
+	
 
 }

@@ -51,6 +51,7 @@
         <div class="items ">
             <a href="admin_home.jsp" >Home</a>
             <a href="admin_add_data.jsp" class="active"> Add Career Training Data</a>
+            <a href="admin_add_course.jsp"> Add Course</a>
             <a href="about_us.jsp">About Us</a>
 
         </div>

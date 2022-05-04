@@ -17,13 +17,11 @@
 	type="image/x-icon">
 <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
 
-<link rel="stylesheet" href="css/admin_home.css">
-<title>ADMIN-HOME</title>
-
+<link rel="stylesheet" href="css/admin_add_data.css">
+<title>Admin Add Data</title>
 </head>
 
 <body>
-
 	<script>
 		function veiwMenu() {
 			var x = document.getElementById("menu-link");
@@ -50,20 +48,18 @@
 		}
 	</script>
 	<div class="logo">
-		<a href="admin_home.jsp"> <img src="images/MINI-PROJECT-LOGO.svg"
-			alt="LOGO">
+		<a href="admin_home.js[]"> <img src="images/MINI-PROJECT-LOGO.svg"
+			alt="">
 		</a>
 	</div>
 	<div class="navbar" id="nav">
 
 		<div class="items ">
-			<a href="admin_home.jsp" class="active ">Home</a>
-			 <a href="admin_add_data.jsp"> Add Career Training Data</a> 
-			 <a href="admin_add_course.jsp"> Add Course</a>
-			<a href="about_us.jsp">About Us</a>
+			<a href="admin_home.jsp">Home</a> <a href="admin_add_data.jsp">
+				Add Career Training Data</a> <a href="admin_add_course.jsp"
+				class="active"> Add Course</a> <a href="about_us.jsp">About Us</a>
 
 		</div>
-		
 		<div class="menu">
 			<i class="fa fa-navicon"
 				style="color: white; font-size: 38px; position: relative; left: 250px; cursor: pointer"
@@ -81,74 +77,62 @@
 		</ul>
 	</div>
 	<div class="content">
+		<form action="AdminAddCourse" method="post">
+			<div class="title">
+				<h1>Add new course</h1>
+			</div>
+			<div class="box">
+				<table>
 
+					<tr>
+						<td><label>Course Name:</label></td>
+						<td><input type="text" name="name"></td>
+					</tr>
+					<tr>
+						<td><label>Course Description:</label></td>
+						<td><input type="text" name="desc"></td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="Add Data" name="submitbtn"></td>
+					</tr>
+
+				</table>
+
+			</div>
+		</form>
+	</div>
+
+	<div class="content-details">
 		<sql:setDataSource var="db" driver="com.mysql.cj.jdbc.Driver"
 			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
 			password="123456" />
 
-		<div class="choose">
-			<fieldset>
-				<legend>Choose a User</legend>
-				<select name="users" id="user" onclick="viewUser();">
-					<option value="applicant" selected>View Applicant Details</option>
-					<option value="company">View Recruiter Details</option>
-				</select>
-			</fieldset>
-		</div>
-		<div class="applicantDetails" id="appDetails"
-			style="visibility: hidden">
-			APPLICANT DETAILS
-			<sql:query dataSource="${db}" var="rs">  
-SELECT * from applicant;  
-</sql:query>
+		<div class="applicantDetails" id="appDetails">
+			COURSES
+			<sql:query dataSource="${db}" var="rs">  SELECT * from course;  </sql:query>
 			<table border="2" width="100%">
 				<tr>
-					<th>Applicant ID</th>
-					<th>Applicant Name</th>
-					<th>Applicant Email</th>
-					<th>Address</th>
-				</tr>
+					<th>Course ID</th>
+					<th>Course Name</th>
+					<th>Description</th>
+								</tr>
 				<c:forEach var="table" items="${rs.rows}">
 					<tr>
-						<td><c:out value="${table.app_id}" /></td>
-						<td><c:out value="${table.app_name}" /></td>
-						<td><c:out value="${table.app_email}" /></td>
-						<td><c:out value="${table.location}" /></td>
+						<td><c:out value="${table.course_id}" /></td>
+						<td><c:out value="${table.course_name}" /></td>
+						<td><c:out value="${table.course_desc}" /></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
-		<div class="companyDetails" id="compDetails"
-			style="visibility: hidden">COMPANY DETAILS
-			<sql:query dataSource="${db}" var="rs">  
-SELECT * from recruiter;  
-</sql:query>
-<table border="2" width="100%">
-				<tr>
-					<th>Recruiter ID</th>
-					<th>Recruiter Name</th>
-					<th>Recruiter Email</th>
-					<th>Address</th>
-					<th>Contact Details</th>
-				</tr>
-				<c:forEach var="table" items="${rs.rows}">
-					<tr>
-						<td><c:out value="${table.rec_id}" /></td>
-						<td><c:out value="${table.rec_name}" /></td>
-						<td><c:out value="${table.rec_email}" /></td>
-						<td><c:out value="${table.rec_address}" /></td>
-						<td><c:out value="${table.rec_contact}" /></td>
-					</tr>
-				</c:forEach>
-			</table>
-			</div>
 	</div>
+
 	<div class="footer">
 		<footer>
 			<h3>Contact Us</h3>
 			<ol>
 				<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+				<li><a href=""><i class="fa fa-twitter"></i></a></li>
 				<li><a href="#"><i class="iconify"
 						data-icon="logos:google-gmail"></i></a></li>
 			</ol>
@@ -171,6 +155,7 @@ SELECT * from recruiter;
 			}
 		}
 	</script>
+
 </body>
 
 </html>

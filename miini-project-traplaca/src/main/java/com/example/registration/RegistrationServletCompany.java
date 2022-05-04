@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.dbconnection.DBConnection;
+import com.example.dao.DBConnection;
+import com.example.dao.RecruiterDao;
+import com.example.models.Recruiter;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -20,38 +22,29 @@ import com.example.dbconnection.DBConnection;
 @WebServlet("/registerRecruiter")
 public class RegistrationServletCompany extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private RecruiterDao recruiterDao;
+	
+	
+	public RegistrationServletCompany() {
+		this.recruiterDao = new RecruiterDao();
+	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String uname = request.getParameter("name");
-		String uemail = request.getParameter("email");
-		String upwd = request.getParameter("password");
-		String umobile = request.getParameter("contact");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String contact = request.getParameter("contact");
 		String address = request.getParameter("address");
 		String desc = request.getParameter("description");
 		
-		System.out.println(uname);
-		System.out.println(uemail);
-		System.out.println(upwd);
-		System.out.println(umobile);
-		System.out.println(address);
-		System.out.println(desc);
 		
-		Connection conn = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = new DBConnection().getConnection();
-
-			PreparedStatement stmt = conn
-					.prepareStatement("insert into recruiter(rec_name, rec_email, rec_password, rec_desc, rec_address) values (?, ?, ?, ?, ?);");
-
-			stmt.setString(1, uname);
-			stmt.setString(2, uemail);
-			stmt.setString(3, upwd);
-			stmt.setString(4, desc);
-			stmt.setString(5, address);	
 			
-			int rowCount = stmt.executeUpdate();
+			Recruiter recruiter = new Recruiter(name, email, password, desc, address, contact);
+			int rowCount = recruiterDao.insertRecruiter(recruiter);
 			
 			RequestDispatcher dispatcher = null;
 			

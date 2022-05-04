@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.dbconnection.DBConnection;
+import com.example.dao.DBConnection;
 
 /**
  * Servlet implementation class RegistrationServlet

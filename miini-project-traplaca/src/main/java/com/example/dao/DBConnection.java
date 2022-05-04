@@ -1,4 +1,4 @@
-package com.example.dbconnection;
+package com.example.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,8 +8,9 @@ public class DBConnection {
 	
 	Connection conn = null;
 	
-	public Connection getConnection() {
+	public Connection getConnection() throws ClassNotFoundException {
 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/traplaca?allowPublicKeyRetrieval=true&useSSL=false", "root",
 				"123456");
 		} catch (SQLException e) {
