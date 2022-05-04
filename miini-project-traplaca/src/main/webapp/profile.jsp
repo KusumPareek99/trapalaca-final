@@ -59,7 +59,7 @@
             <ul style="list-style: none;">
                 <li> <a href="profile.jsp">My Profile</a></li>
                 <hr>
-                <li><a href="login.jsp">Log Out</a></li>
+                <li><a href="logout">Log Out</a></li>
                 <hr>
                 <li><a href="">Help</a></li>
                 <hr>

@@ -130,6 +130,7 @@ SELECT * from recruiter;
 					<th>Recruiter Email</th>
 					<th>Address</th>
 					<th>Contact Details</th>
+					<th>Action</th>
 				</tr>
 				<c:forEach var="table" items="${rs.rows}">
 					<tr>
@@ -138,6 +139,12 @@ SELECT * from recruiter;
 						<td><c:out value="${table.rec_email}" /></td>
 						<td><c:out value="${table.rec_address}" /></td>
 						<td><c:out value="${table.rec_contact}" /></td>
+						<td>
+						<form action="DeleteRecruiter" method="post">
+						<input type="hidden" name="rec_id" value=<c:out value="${table.rec_id}" />>
+						<button type="submit">Delete</button>
+						</form>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

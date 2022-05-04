@@ -16,7 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.dao.CourseDao;
 import com.example.dao.DBConnection;
+import com.example.dao.JobDao;
+import com.example.dao.RecruiterDao;
+import com.example.models.Job;
+import com.example.models.Recruiter;
 
 /**
  * Servlet implementation class PostJobServlet
@@ -24,6 +29,18 @@ import com.example.dao.DBConnection;
 @WebServlet("/postJob")
 public class PostJobServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private RecruiterDao recruiterDao = null;
+	private CourseDao courseDao = null;
+	private JobDao jobDao = null;
+
+	public PostJobServlet() {
+		this.recruiterDao = new RecruiterDao();
+		this.courseDao = new CourseDao();
+		this.jobDao = new JobDao();
+	}
+
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
@@ -38,43 +55,18 @@ public class PostJobServlet extends HttpServlet {
         
         HttpSession httpSession = request.getSession();
         String email = httpSession.getAttribute("c_email").toString();
-		
-		System.out.println(title);
-		System.out.println(desc);
-		System.out.println(location);
-		System.out.println(lastDate);
-		System.out.println(postDate);
-		System.out.println(course);
-		System.out.println(email);
-		Connection conn = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = new DBConnection().getConnection();
-			
-			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery("select course_id from course where course_name = \""  + course +"\";");
-			
-			if(resultSet.next()) {
-				course_id = resultSet.getInt(1);					
-			}
-			
-			ResultSet resultSet2 = statement.executeQuery("select rec_id from recruiter where rec_email = \"" + email + "\";");
-			if(resultSet2.next()) {
-				rec_id =  resultSet2.getInt(1);
-			}
-			
-			PreparedStatement stmt = conn
-					.prepareStatement("insert into job(job_title, job_desc, post_date, last_date, location, course_id, rec_id) values (?, ?, ?, ?, ?, ?, ?);");
+	
 
-			stmt.setString(1, title);
-			stmt.setString(2, desc);
-			stmt.setDate(3, postDate);
-			stmt.setDate(4, lastDate);
-			stmt.setString(5, location);
-			stmt.setInt(6, course_id);
-			stmt.setInt(7, rec_id);
+		try {
+				
+			course_id = courseDao.getCourseId(course);
 			
-			int rowCount = stmt.executeUpdate();
+			rec_id = recruiterDao.getRecruiterByEmail(email).getId();
+			
+			Job job = new Job(title, desc, postDate, lastDate, location, course_id, rec_id);
+			
+						
+			int rowCount = jobDao.insertJob(job);
 			
 			RequestDispatcher dispatcher = null;
 			

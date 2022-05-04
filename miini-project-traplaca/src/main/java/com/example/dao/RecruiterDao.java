@@ -15,7 +15,7 @@ public class RecruiterDao {
 	private static final String SELECT_ALL = "select * from recruiter;";
 	private static final String SELECT_BY_EMAIL = "select * from recruiter where rec_email = ?";
 	private static final String UPDATE_SQL = "update recruiter set rec_name = ?, rec_email = ?, rec_desc = ?, rec_address = ?, rec_contact = ? where rec_id = ?";
-	private static final String DELETE_SQL = "delete from users where id = ?";
+	private static final String DELETE_SQL = "delete from recruiter where rec_id = ?";
 	
 	// insert recruiter
 	public int insertRecruiter(Recruiter recruiter) throws SQLException{

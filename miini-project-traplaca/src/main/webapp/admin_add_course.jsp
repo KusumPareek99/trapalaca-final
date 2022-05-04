@@ -102,13 +102,13 @@
 		</form>
 	</div>
 
-	<div class="content-details">
+	<div class="content-data">
 		<sql:setDataSource var="db" driver="com.mysql.cj.jdbc.Driver"
 			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
 			password="123456" />
 
 		<div class="applicantDetails" id="appDetails">
-			COURSES
+			<h1>COURSES</h1>
 			<sql:query dataSource="${db}" var="rs">  SELECT * from course;  </sql:query>
 			<table border="2" width="100%">
 				<tr>

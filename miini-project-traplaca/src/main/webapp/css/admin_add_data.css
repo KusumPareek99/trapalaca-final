@@ -146,6 +146,27 @@ body {
     color: #F9A826;
 }
 
+.content-data .applicantDetails{
+    background: #fff;
+    box-shadow: 0 15px 30px rgba(248, 133, 2, 0.1);
+    border-radius: 10px;
+    line-height: 40px;
+    padding: 35px 15px;
+    margin: 100px 200px;
+    text-align: center;
+    position: absolute;
+    left: 300px;
+}
+
+.content-data .applicantDetails table tr th{
+	background-color:#94661c;
+	color:white;
+}
+.content-data .applicantDetails table tr td{
+	background-color:#fcf3e9;
+	color:black;
+}
+
 
 
 .sticky {
