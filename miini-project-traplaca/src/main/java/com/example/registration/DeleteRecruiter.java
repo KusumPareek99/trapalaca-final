@@ -8,14 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.example.dao.RecruiterDao;
-import com.example.models.Recruiter;
 
-/**
- * Servlet implementation class DeleteRecruiter
- */
 @WebServlet("/DeleteRecruiter")
 public class DeleteRecruiter extends HttpServlet {
 	private static final long serialVersionUID = 1L;

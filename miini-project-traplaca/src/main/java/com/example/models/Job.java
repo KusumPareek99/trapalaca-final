@@ -35,6 +35,15 @@ public class Job {
 		this.course_id = course_id;
 		this.rec_id = rec_id;
 	}
+	
+	public Job(int id, String title, String desc, Date last_date) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.desc = desc;
+		this.last_date = last_date;
+		
+	}
 
 	public int getId() {
 		return id;

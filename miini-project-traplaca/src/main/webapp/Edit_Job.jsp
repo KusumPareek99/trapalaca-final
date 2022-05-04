@@ -1,13 +1,9 @@
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
@@ -17,11 +13,10 @@
 
         <link rel="stylesheet" href="css/job_post.css">
 
-        <title>Create new Job Post</title>
+        <title>Edit Job Post</title>
 
-    </head>
-
-    <body>
+</head>
+ <body>
         <script>
             function veiwMenu() {
                 var x = document.getElementById("menu-link");
@@ -42,7 +37,7 @@
 
             <div class="items ">
                 <a href="Company_home.jsp" >Home</a>
-                <a href="job_post.jsp"class="active">Create a Job Post</a>
+                <a href="job_post.html"class="active">Create a Job Post</a>
                 <a href="about_us.jsp">About Us</a>
 
             </div>
@@ -62,19 +57,23 @@
                 <hr>
             </ul>
         </div>
-        <div class="content">
+
+
+    <div class="content">
             <div class="title">
-                <h1>Create New Job Post</h1>
+                <h1>Edit Job Post</h1>
             </div>
             <div class="box">
-                <form action="postJob" method="post">
+                <form action="EditJobPost" method="post">
+                <input type="hidden" name="job_id" value=<%= request.getParameter("job_id") %>>
                     <table>
                         <tr>
+                        
                             <td>
                                 <label for="job_title">Job Title:</label>
                             </td>
                             <td>
-                                <input type="text" name="title" id="job_title" required>
+                                <input type="text" name="job_title" id="job_title" value=<%= request.getParameter("job_title") %> required>
                             </td>
                         </tr>
                         <tr>
@@ -82,72 +81,23 @@
                                 <label for="desc">Job Description:</label>
                             </td>
                             <td>
-                                <textarea name="description" id="desc" cols="50" rows="5" required></textarea>
+                                <textarea name="job_desc" id="desc" cols="50" rows="5" required><%= request.getParameter("job_desc") %></textarea>
                             </td>
                         </tr>
-                        <tr>
-                            <td><label for="course" id="scourse">Course :</label></td>
-                            <td><select id="course" name="course" required>
-                                    <option>--Choose a course--</option>
-                                    <option>MCA</option>
-                                    <option>MBA</option>
-                                    <option>MBA(DM)</option>
-                                </select></td>
-                        </tr>
-                        <tr>
-                            <td><label for="loc">Location:</label></td>
-                            <td><input type="text" name="location" id="loc"></td>
-                        </tr>
+                        
                         <tr>
                             <td><label for="lastDate">Last Date to Apply:</label></td>
-                            <td><input type="date" id="lastDate" name="lastDate"></td>
+                            <td><input type="date" id="lastDate" name="last_date" value=<%= request.getParameter("last_date") %>></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Post"></td>
+                            <td><input type="submit" value="Edit" style="position:relative;top:-20px;"></td>
                         </tr>
                     </table>
                 </form>
             </div>
          
         </div>
-
-   <div class="content-data">
-		<sql:setDataSource var="db" driver="com.mysql.cj.jdbc.Driver"
-			url="jdbc:mysql://localhost:3306/traplaca?useSSL=false" user="root"
-			password="123456" />
-
-		<div class="jobDetails" id="jobDetails">
-			<h1>Job Posts</h1>
-			<sql:query dataSource="${db}" var="rs">  SELECT * from job;  </sql:query>
-			<table border="2" width="100%">
-				<tr>
-					<th>Job Title</th>
-					<th>Job Description</th>
-					<th>Last Date</th>
-					<th>Action</th>
-								</tr>
-				<c:forEach var="table" items="${rs.rows}">
-					<tr>
-						<td><c:out value="${table.job_title}" /></td>
-						<td><c:out value="${table.job_desc}" /></td>
-						<td><c:out value="${table.last_date}" /></td>
-						<td>
-						<form action="Edit_Job.jsp" >
-						<input type="hidden" name="job_id" value=<c:out value="${table.job_id}" />>
-						<input type="hidden" name="job_title" value=<c:out value="${table.job_title}" />>
-						<input type="hidden" name="job_desc" value=<c:out value="${table.job_desc}" />>
-						<input type="hidden" name="last_date" value=<c:out value="${table.last_date}" />>
-						
-						<button type="submit">Edit</button>
-						</form>
-						</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</div>
-
-        <div class="footer">
+<div class="footer">
             <footer>
                 <h3>Contact Us</h3>
                 <ol>
