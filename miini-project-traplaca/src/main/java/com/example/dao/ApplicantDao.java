@@ -26,7 +26,7 @@ public class ApplicantDao {
 			stmt.setString(3, applicant.getPassword());
 			stmt.setString(4, applicant.getLocation());
 			stmt.setInt(5, applicant.getCourse_id());
-			stmt.setInt(6, applicant.getJob_id());
+			stmt.setString(6, null);
 			stmt.setBlob(7, applicant.getProfilePicture());
 			stmt.setBlob(8, applicant.getResume());
 			

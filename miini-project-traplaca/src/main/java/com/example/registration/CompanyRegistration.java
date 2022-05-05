@@ -20,13 +20,13 @@ import com.example.models.Recruiter;
  * Servlet implementation class RegistrationServlet
  */
 @WebServlet("/registerRecruiter")
-public class RegistrationServletCompany extends HttpServlet {
+public class CompanyRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private RecruiterDao recruiterDao;
 	
 	
-	public RegistrationServletCompany() {
+	public CompanyRegistration() {
 		this.recruiterDao = new RecruiterDao();
 	}
 

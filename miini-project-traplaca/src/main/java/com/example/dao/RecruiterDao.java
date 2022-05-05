@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.print.DocFlavor.READER;
-
 import com.example.models.Recruiter;
 
 public class RecruiterDao {
