@@ -21,6 +21,7 @@ public class RecruiterDao {
 	public int insertRecruiter(Recruiter recruiter) throws SQLException{
 		int rowCount = 0;
 		try {
+			
 			Connection conn = new DBConnection().getConnection();
 			PreparedStatement stmt = conn.prepareStatement(INSERT_SQL);
 			
