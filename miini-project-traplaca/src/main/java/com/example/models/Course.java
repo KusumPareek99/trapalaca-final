@@ -1,24 +1,23 @@
 package com.example.models;
 
 public class Course {
-	
+
 	private int id;
 	private String name;
 	private String desc;
-	
+
 	public Course(int id, String name, String desc) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 	}
-	
+
 	public Course(String name, String desc) {
 		super();
 		this.name = name;
 		this.desc = desc;
 	}
-	
 
 	public int getId() {
 		return id;

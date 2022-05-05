@@ -22,14 +22,12 @@ import com.example.models.Recruiter;
 @WebServlet("/registerRecruiter")
 public class CompanyRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private RecruiterDao recruiterDao;
-	
-	
+
 	public CompanyRegistration() {
 		this.recruiterDao = new RecruiterDao();
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -39,23 +37,22 @@ public class CompanyRegistration extends HttpServlet {
 		String contact = request.getParameter("contact");
 		String address = request.getParameter("address");
 		String desc = request.getParameter("description");
-		
-		
+
 		try {
-			
+
 			Recruiter recruiter = new Recruiter(name, email, password, desc, address, contact);
 			int rowCount = recruiterDao.insertRecruiter(recruiter);
-			
+
 			RequestDispatcher dispatcher = null;
-			
-			if(rowCount > 0) {
+
+			if (rowCount > 0) {
 				request.setAttribute("status", "success");
 				dispatcher = request.getRequestDispatcher("login.jsp");
-			}else {
+			} else {
 				request.setAttribute("status", "failed");
 				dispatcher = request.getRequestDispatcher("company_signup.jsp");
 			}
-			
+
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

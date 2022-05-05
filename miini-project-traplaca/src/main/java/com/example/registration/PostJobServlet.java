@@ -29,7 +29,7 @@ import com.example.models.Recruiter;
 @WebServlet("/postJob")
 public class PostJobServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private RecruiterDao recruiterDao = null;
 	private CourseDao courseDao = null;
 	private JobDao jobDao = null;
@@ -40,44 +40,41 @@ public class PostJobServlet extends HttpServlet {
 		this.jobDao = new JobDao();
 	}
 
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String title = request.getParameter("title");
-		String desc	= request.getParameter("description");
+		String desc = request.getParameter("description");
 		String course = request.getParameter("course");
 		String location = request.getParameter("location");
 		Date lastDate = Date.valueOf(request.getParameter("lastDate"));
-		long millis=System.currentTimeMillis();  
-        Date postDate= new Date(millis);
-        int course_id= 0;
-        int rec_id = 0;
-        
-        HttpSession httpSession = request.getSession();
-        String email = httpSession.getAttribute("c_email").toString();
-	
+		long millis = System.currentTimeMillis();
+		Date postDate = new Date(millis);
+		int course_id = 0;
+		int rec_id = 0;
+
+		HttpSession httpSession = request.getSession();
+		String email = httpSession.getAttribute("c_email").toString();
 
 		try {
-				
+
 			course_id = courseDao.getCourseId(course);
-			
+
 			rec_id = recruiterDao.getRecruiterByEmail(email).getId();
-			
+
 			Job job = new Job(title, desc, postDate, lastDate, location, course_id, rec_id);
-			
-						
+
 			int rowCount = jobDao.insertJob(job);
-			
+
 			RequestDispatcher dispatcher = null;
-			
-			if(rowCount > 0) {
+
+			if (rowCount > 0) {
 				request.setAttribute("status", "success");
 				dispatcher = request.getRequestDispatcher("job_post.jsp");
-			}else {
+			} else {
 				request.setAttribute("status", "failed");
 				dispatcher = request.getRequestDispatcher("job_post.jsp");
 			}
-			
+
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

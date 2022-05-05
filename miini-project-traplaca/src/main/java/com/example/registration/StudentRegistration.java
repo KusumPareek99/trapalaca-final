@@ -43,8 +43,6 @@ public class StudentRegistration extends HttpServlet {
 		String upwd = request.getParameter("password");
 		String ucourse = request.getParameter("course");
 		String ulocation = null;
-//		Blob profilePicture = null;
-//		Blob resume = null;
 		@SuppressWarnings("unused")
 		int job_id = 0;
 		int course_id = 0;

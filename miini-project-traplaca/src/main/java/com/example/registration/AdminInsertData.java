@@ -22,40 +22,42 @@ public class AdminInsertData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type= request.getParameter("type");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String type = request.getParameter("type");
 		String title = request.getParameter("title");
 		String link = request.getParameter("link");
-		
+
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = new DBConnection().getConnection();
-			
-			PreparedStatement ins = conn.prepareStatement("INSERT INTO career_training (type,links,title) VALUES (?,?,?);");
-			
+
+			PreparedStatement ins = conn
+					.prepareStatement("INSERT INTO career_training (type,links,title) VALUES (?,?,?);");
+
 			ins.setString(1, type);
 			ins.setString(2, link);
 			ins.setString(3, title);
-			
 
 			int rowCount = ins.executeUpdate();
-			
+
 			RequestDispatcher dispatcher = null;
-			
-			if(rowCount > 0) {
+
+			if (rowCount > 0) {
 				request.setAttribute("status", "success");
 				dispatcher = request.getRequestDispatcher("admin_add_data.jsp");
-			}else {
+			} else {
 				request.setAttribute("status", "failed");
 				dispatcher = request.getRequestDispatcher("admin_add_data.jsp");
 			}
-			
+
 			dispatcher.forward(request, response);
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

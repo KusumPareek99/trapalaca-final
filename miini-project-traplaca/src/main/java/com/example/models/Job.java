@@ -11,7 +11,7 @@ public class Job {
 	private String location;
 	private int course_id;
 	private int rec_id;
-	
+
 	public Job(int id, String title, String desc, Date post_date, Date last_date, String location, int course_id,
 			int rec_id) {
 		super();
@@ -24,7 +24,7 @@ public class Job {
 		this.course_id = course_id;
 		this.rec_id = rec_id;
 	}
-	
+
 	public Job(String title, String desc, Date post_date, Date last_date, String location, int course_id, int rec_id) {
 		super();
 		this.title = title;
@@ -35,14 +35,14 @@ public class Job {
 		this.course_id = course_id;
 		this.rec_id = rec_id;
 	}
-	
+
 	public Job(int id, String title, String desc, Date last_date) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.desc = desc;
 		this.last_date = last_date;
-		
+
 	}
 
 	public int getId() {
@@ -108,6 +108,5 @@ public class Job {
 	public void setRec_id(int rec_id) {
 		this.rec_id = rec_id;
 	}
-	
-	
+
 }

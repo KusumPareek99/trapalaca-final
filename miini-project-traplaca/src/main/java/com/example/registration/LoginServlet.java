@@ -36,11 +36,11 @@ public class LoginServlet extends HttpServlet {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = new DBConnection().getConnection();
 			PreparedStatement stmt = null;
-			
+
 			if (usertype.equals("student")) {
 				stmt = conn.prepareStatement("select * from applicant where app_email = ? and app_password = ?;");
 			}
-			
+
 			if (usertype.equals("company")) {
 				stmt = conn.prepareStatement("select * from recruiter where rec_email = ? and rec_password = ?;");
 			}
@@ -52,18 +52,18 @@ public class LoginServlet extends HttpServlet {
 			stmt.setString(2, upwd);
 
 			ResultSet rs = stmt.executeQuery();
-			
+
 			if (rs.next()) {
 				System.out.println("User exists");
 				if (remember.equals("on")) {
-					//String name = usertype.equals("company") ? "rec_name" : "app_name";
-					String name="";
-					if(usertype.equals("company")) {
-						name="rec_name";
-					}else if(usertype.equals("student")) {
-						name="app_name";
-					}else if(usertype.equals("admin")) {
-						name="ad_name";
+					// String name = usertype.equals("company") ? "rec_name" : "app_name";
+					String name = "";
+					if (usertype.equals("company")) {
+						name = "rec_name";
+					} else if (usertype.equals("student")) {
+						name = "app_name";
+					} else if (usertype.equals("admin")) {
+						name = "ad_name";
 					}
 					session.setAttribute("type", usertype);
 					session.setAttribute("name", rs.getString(name));
@@ -73,11 +73,11 @@ public class LoginServlet extends HttpServlet {
 					dispatcher = request.getRequestDispatcher("Company_home.jsp");
 				}
 				if (usertype.equals("student")) {
-					session.setAttribute("a_email",uemail);
+					session.setAttribute("a_email", uemail);
 					dispatcher = request.getRequestDispatcher("student_home_page.jsp");
 				}
 				if (usertype.equals("admin")) {
-					session.setAttribute("admin_email",uemail);
+					session.setAttribute("admin_email", uemail);
 					dispatcher = request.getRequestDispatcher("admin_home.jsp");
 				}
 			} else {

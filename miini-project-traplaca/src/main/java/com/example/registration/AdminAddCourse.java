@@ -20,41 +20,43 @@ import com.example.models.Course;
 @WebServlet("/AdminAddCourse")
 public class AdminAddCourse extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private CourseDao courseDao;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminAddCourse() {
-        this.courseDao = new CourseDao();
-    }
+	private CourseDao courseDao;
 
-	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AdminAddCourse() {
+		this.courseDao = new CourseDao();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String desc = request.getParameter("desc");
-		
+
 		try {
-			
+
 			Course course = new Course(name, desc);
 
 			int rowCount = courseDao.insertCourse(course);
-			
+
 			RequestDispatcher dispatcher = null;
-			
-			if(rowCount > 0) {
+
+			if (rowCount > 0) {
 				request.setAttribute("status", "success");
 				dispatcher = request.getRequestDispatcher("admin_add_course.jsp");
-			}else {
+			} else {
 				request.setAttribute("status", "failed");
 				dispatcher = request.getRequestDispatcher("admin_add_course.jsp");
 			}
-			
+
 			dispatcher.forward(request, response);
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
